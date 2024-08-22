@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
 const conversatonSchema = new mongoose.Schema({
-    participants :{
+    participants :[{
         type: mongoose.Schema.Types.ObjectId,
         ref :"User"
-    },
+    }],
 
-    message :[{
+    messages :[{
         type : mongoose.Schema.Types.ObjectId,
         ref: "Message",
         default: []
