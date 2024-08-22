@@ -44,4 +44,26 @@ const sendMessage = async (req, res) => {
     }
 }
 
-module.exports = { sendMessage }
+// function for get message from conversaton
+const getMessage = async (req, res) =>{
+    try {
+        const {id:userToChatId} = req.params;
+        const senderId = req.user._id;
+
+        const conversation = await Conversation.findOne({
+            participants:{$all :[senderId, userToChatId]},
+        }).populate("messages"); // this is for get message only
+
+        if(!conversation) return res.status(200).json([]);
+
+        res.status(201).json(conversation.messages);
+        
+    } catch (error) {
+        console.log("error in get message", error.message);
+        res.status(500).json({error:" internal server error"})
+        
+        
+    }
+}
+
+module.exports = { sendMessage, getMessage }

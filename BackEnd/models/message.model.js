@@ -17,6 +17,7 @@ const messageSchema = new mongoose.Schema({
         require: true
     }
 }, 
+// to save data of sender and receiver and their message as well
 // createdAt, updatedAt field added
 {timestamps: true});
 
