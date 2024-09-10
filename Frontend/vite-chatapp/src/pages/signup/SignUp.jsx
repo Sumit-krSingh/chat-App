@@ -2,6 +2,8 @@ import React from 'react'
 import GenderCheckbox from './GenderCheckbox'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import userSignup from '../../hooks/userSignup'
+
 
 const SignUp = () => {
   const [inputs, setInputs] = useState({
@@ -11,6 +13,8 @@ const SignUp = () => {
     confirmPassword:"",
     gender:"",
   });
+  const {loading, signup} = userSignup();
+  
 
   const handleCheckboxChange =(gender) =>{
     setInputs({
@@ -19,9 +23,13 @@ const SignUp = () => {
     })
     
   };
-  const handleSubmit =(e) =>{
+  const handleSubmit = async(e) =>{
     e.preventDefault();
     console.log(inputs);
+
+    // call the signup hook for connecting mongodb and registration in database
+
+    await signup(inputs)
     
   };
   return (

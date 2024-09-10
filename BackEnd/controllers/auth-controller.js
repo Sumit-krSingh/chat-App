@@ -54,7 +54,7 @@ const signup = async (req, res) => {
                 _id: newUser._id,
                 fullName: newUser.fullName,
                 username: newUser.username,
-                profilePic: newUser.profilePic
+                profilePic: newUser.profilePic,
             });
         }
         else {

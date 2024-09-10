@@ -33,6 +33,9 @@ const userSchema = new mongoose.Schema({
 
 });
 
+({timestamps: true});
+
+
 const User = new mongoose.model("Signup", userSchema);
 
 module.exports = User;
