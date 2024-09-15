@@ -81,7 +81,9 @@ const SignUp = () => {
         <Link to ={"/login"} className="text-lg text-pink-400 hover:underline hover:text-pink-600 mt-3 inline-block">Already have account ?</Link> 
 
         <div>
-          <button className='btn btn-block mt-2 btn-sm'>SignUp</button>
+          <button className='btn btn-block mt-2 btn-sm' disabled ={loading}>
+            {loading ? <span className='loading loading-spinner'></span> : "Signup"}
+          </button>
         </div>
       </form>
     </div>
