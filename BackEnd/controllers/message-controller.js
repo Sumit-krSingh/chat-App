@@ -1,6 +1,7 @@
 const { Promise } = require("mongoose");
 const Conversation = require("../models/conversation.model");
 const Message = require("../models/message.model");
+const { getReceiverSocketId,io } = require("../socket/socket.js");
 const sendMessage = async (req, res) => {
     try {
         const { message } = req.body;
@@ -31,9 +32,18 @@ const sendMessage = async (req, res) => {
         await newMessage.save();
         //  above conversation and message save run not parallel
 
-        // await Promise.all([conversation.save(), newMessage.save()]);
-
+        
         // above code is for save parallely to both
+        // await Promise.all([conversation.save(), newMessage.save()]);
+        
+        // code for socket io 
+
+        const receiverSocketId = getReceiverSocketId(receiverId);
+        if(receiverSocketId){
+
+            // io.to is used to send event to specific client not all client
+            io.to(receiverSocketId).emit("newMessage", newMessage);
+        }
 
         res.status(201).json(newMessage)
 

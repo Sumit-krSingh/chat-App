@@ -8,9 +8,10 @@ const userRoute = require("./router/user-router");
 
 
 const connectDb = require("./db/connectToMongo");
+const {app, server} = require("./socket/socket.js")
 
 
-const app = express();
+// const app = express();
 const PORT = process.env.PORT || 5000;
 
 // app.get("/", (req, res) =>{
@@ -27,7 +28,7 @@ app.use("/api/users", userRoute);
 
 
 
-app.listen(PORT, () =>{
+server.listen(PORT, () =>{
     connectDb();
     console.log(`server is running on ${PORT}`)
 });
